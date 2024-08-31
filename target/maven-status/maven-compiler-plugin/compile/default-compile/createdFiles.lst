@@ -1,0 +1,5 @@
+com\techstockmaster\app\App.class
+com\techstockmaster\util\CriptografiaUtils.class
+com\techstockmaster\util\base\DatabaseSist.class
+com\techstockmaster\util\Message.class
+com\techstockmaster\util\DbException.class
