@@ -59,25 +59,27 @@ admin
 
 *Video Demo* : 
 
-![Video](https://github.com/user-attachments/assets/338effaa-e9e2-4e61-8bd6-12e5f7a3b957)
+![Video](https://github.com/user-attachments/assets/a9f2e2d5-1b7b-4feb-9e18-cdeccb7c5004)
+
 
 *Fotos* :
 
-![01](https://github.com/user-attachments/assets/e2f3c42c-04b1-4b87-89e4-7a3ac65a3189)
+![01](https://github.com/user-attachments/assets/ae51d9fa-aa36-4887-b4c9-6d4cc61bd0cc)
 
-![02](https://github.com/user-attachments/assets/de8f0595-455d-4ec6-93a9-36c6c06720d9)
+![02](https://github.com/user-attachments/assets/240b3a9a-f357-49fd-bad9-1c5fcb88b61d)
 
-![03](https://github.com/user-attachments/assets/1cffa0c1-4422-4f3c-bb12-fa7a22531b6d)
+![03](https://github.com/user-attachments/assets/44efce14-b7eb-468a-91c3-cf28a992c845)
 
-![04](https://github.com/user-attachments/assets/492a0c9c-04ea-4bb4-92d7-62aa7d77afa7)
+![04](https://github.com/user-attachments/assets/60d1d481-f73b-408e-bc9e-9b04852b93d6)
 
-![05](https://github.com/user-attachments/assets/2bf08bdd-fb58-4138-9ccc-e5b6e5802b3a)
+![05](https://github.com/user-attachments/assets/f4112c08-5cf0-4b46-8497-9cfc3390bad7)
 
-![06](https://github.com/user-attachments/assets/ca584c81-e03a-4a72-bfa0-9c2902b2a9b1)
+![06](https://github.com/user-attachments/assets/b2e15ac6-3659-4f55-8f17-8ebcfb017fef)
 
-![07](https://github.com/user-attachments/assets/7f225810-5313-4155-86cb-3a0f2bd9a4bc)
+![07](https://github.com/user-attachments/assets/2c59b9a6-e88c-418f-8863-30f17cfce9a7)
 
-![08](https://github.com/user-attachments/assets/0bbf0e89-8fcc-4f11-899b-67d2af11bb69)
+![08](https://github.com/user-attachments/assets/0fcfcdd5-b0d8-4320-9966-623c1168962b)
+
 
 ## ✒️ Autores
 
