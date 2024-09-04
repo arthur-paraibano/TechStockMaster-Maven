@@ -1,10 +1,5 @@
 package com.techstockmaster.model.dao;
 
-import com.techstockmaster.imp.GenericDao;
-import com.techstockmaster.model.entities.Shopping;
-import com.techstockmaster.util.Session;
-import com.techstockmaster.util.base.DatabaseSist;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techstockmaster.imp.GenericDao;
+import com.techstockmaster.model.entities.Shopping;
+import com.techstockmaster.util.Session;
+import com.techstockmaster.util.base.DatabaseSist;
 
 public class ShoppingDAO implements GenericDao<Shopping> {
     private Connection con;
@@ -66,7 +65,7 @@ public class ShoppingDAO implements GenericDao<Shopping> {
     @Override
     public List<Shopping> findAll() throws SQLException, Exception {
         List<Shopping> lista = new ArrayList<>();
-        String sql = "SELECT CO.ID AS ID, EQ.EQUIPAMENTO AS EQUIPAMENTO, QUANTIDADE, ST.NOME AS SETOR, LG.USERNAME AS TECNICO, CO.DESCRICAO, CO.DATA, CO.STATUS FROM bd_estoque.solicitacao_compra CO LEFT JOIN bd_estoque.equipamento EQ ON CO.FK_CODEQUIP = EQ.ID LEFT JOIN bd_estoque.setor ST ON CO.FK_CODSETOR = ST.ID LEFT JOIN bd_estoque.user LG ON CO.FK_CODTECNICO = LG.ID ORDER BY CO.FK_CODEQUIP ASC";
+        String sql = "SELECT CO.ID AS ID, EQ.EQUIPAMENTO AS EQUIPAMENTO, QUANTIDADE, ST.NOME AS SETOR, LG.USERNAME AS TECNICO, CO.DESCRICAO, CO.DATA, CO.STATUS FROM bd_estoque.solicitacao_compra CO LEFT JOIN bd_estoque.equipamento EQ ON CO.FK_CODEQUIP = EQ.ID LEFT JOIN bd_estoque.setor ST ON CO.FK_CODSETOR = ST.ID LEFT JOIN bd_estoque.usernames LG ON CO.FK_CODTECNICO = LG.ID ORDER BY CO.FK_CODEQUIP ASC";
         this.con = DatabaseSist.getConnection();
         this.stmt = this.con.prepareStatement(sql);
         this.rs = this.stmt.executeQuery();
@@ -111,7 +110,7 @@ public class ShoppingDAO implements GenericDao<Shopping> {
 
     public Shopping findById(Integer id) throws SQLException, Exception {
         Shopping object = new Shopping();
-        String sql = "SELECT CO.ID AS ID, EQ.EQUIPAMENTO AS EQUIPAMENTO, QUANTIDADE, ST.NOME AS SETOR, LG.USERNAME AS TECNICO, CO.DESCRICAO, CO.DATA, CO.STATUS FROM bd_estoque.solicitacao_compra CO LEFT JOIN bd_estoque.equipamento EQ ON CO.FK_CODEQUIP = EQ.ID LEFT JOIN bd_estoque.setor ST ON CO.FK_CODSETOR = ST.ID LEFT JOIN bd_estoque.user LG ON CO.FK_CODTECNICO = LG.ID WHERE CO.ID = ?";
+        String sql = "SELECT CO.ID AS ID, EQ.EQUIPAMENTO AS EQUIPAMENTO, QUANTIDADE, ST.NOME AS SETOR, LG.USERNAME AS TECNICO, CO.DESCRICAO, CO.DATA, CO.STATUS FROM bd_estoque.solicitacao_compra CO LEFT JOIN bd_estoque.equipamento EQ ON CO.FK_CODEQUIP = EQ.ID LEFT JOIN bd_estoque.setor ST ON CO.FK_CODSETOR = ST.ID LEFT JOIN bd_estoque.usernames LG ON CO.FK_CODTECNICO = LG.ID WHERE CO.ID = ?";
         this.con = DatabaseSist.getConnection();
         this.stmt = this.con.prepareStatement(sql);
         this.stmt.setInt(1, id);

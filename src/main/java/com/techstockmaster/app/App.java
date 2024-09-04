@@ -1,14 +1,15 @@
 package com.techstockmaster.app;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import javax.swing.JOptionPane;
+
 import com.techstockmaster.util.Message;
 import com.techstockmaster.util.Theme;
 import com.techstockmaster.util.base.DatabaseSist;
 import com.techstockmaster.view.login.LoginView;
-
-import javax.swing.*;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 public class App {
     private static final int PORT = 9876;

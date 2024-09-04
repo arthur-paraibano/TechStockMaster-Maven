@@ -1,11 +1,15 @@
 package com.techstockmaster.util.base;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Properties;
+
 import com.techstockmaster.util.CriptografiaUtils;
 import com.techstockmaster.util.DbException;
 import com.techstockmaster.util.Message;
-
-import java.sql.*;
-import java.util.Properties;
 
 /*
 * Classe responsável por estabelecer a conexão com o banco de dados.
@@ -16,8 +20,10 @@ public class DatabaseSist {
     private static final CriptografiaUtils criptoUtils = new CriptografiaUtils();
 
     /*
-    * Metodo para carregar as propriedades descriptografadas do arquivo dbpessoal.properties.encrypted. Se ocorrer um erro, uma exceção DbException é lançada.
-    * */
+     * Metodo para carregar as propriedades descriptografadas do arquivo
+     * dbpessoal.properties.encrypted. Se ocorrer um erro, uma exceção DbException é
+     * lançada.
+     */
     private static Properties loadProperties() {
         Properties props = criptoUtils.obterPropriedadesDescriptografadas("dbpessoal.properties.encrypted");
         if (props != null) {
@@ -56,7 +62,7 @@ public class DatabaseSist {
         try {
             if (con != null) {
                 con.close();
-                System.out.println("Conexão finalizada");
+                // System.out.println("Conexão finalizada");
             }
         } catch (SQLException ex) {
             throw new DbException(ex.getMessage());
@@ -68,7 +74,7 @@ public class DatabaseSist {
         try {
             if (stmt != null) {
                 stmt.close();
-                System.out.println("Conexão finalizada");
+                // System.out.println("Conexão finalizada");
             }
         } catch (SQLException ex) {
             throw new DbException(ex.getMessage());
@@ -81,7 +87,7 @@ public class DatabaseSist {
         try {
             if (rs != null) {
                 rs.close();
-                System.out.println("Conexão finalizada");
+                // System.out.println("Conexão finalizada");
             }
         } catch (SQLException ex) {
             throw new DbException(ex.getMessage());

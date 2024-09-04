@@ -1,10 +1,5 @@
 package com.techstockmaster.view.login;
 
-import com.techstockmaster.controller.UserController;
-import com.techstockmaster.model.entities.User;
-import com.techstockmaster.util.Encrypt;
-import com.techstockmaster.util.EnterToTab;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -18,6 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.techstockmaster.controller.UserController;
+import com.techstockmaster.model.entities.User;
+import com.techstockmaster.util.Encrypt;
+import com.techstockmaster.util.EnterToTab;
 
 public class LoginView extends javax.swing.JFrame {
         private javax.swing.JButton jButt_Entrar;
@@ -250,7 +249,8 @@ public class LoginView extends javax.swing.JFrame {
                 jPanel2.setBackground(new java.awt.Color(204, 204, 204));
                 jLabel2.setIcon(
                                 new javax.swing.ImageIcon(Objects
-                                                .requireNonNull(getClass().getResource("/com/techstockmaster/resources/loginTech.png"))));
+                                                .requireNonNull(getClass().getResource(
+                                                                "/com/techstockmaster/resources/loginTech.png"))));
 
                 javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
                 jPanel2.setLayout(jPanel2Layout);
@@ -294,12 +294,8 @@ public class LoginView extends javax.swing.JFrame {
                 String usuario = minusculaUsuario.toUpperCase();
                 String senha = new String(jTexF_Senha.getPassword()).toUpperCase();
 
-                System.out.println(senha);
-
                 obj.setNomeLogin(usuario);
                 obj.setSenha(Encrypt.encriptografat(senha));
-
-                System.out.println(senha);
                 user.login(obj, this, jTexF_Senha);
         }
 
@@ -318,6 +314,7 @@ public class LoginView extends javax.swing.JFrame {
         }
 
         private void setIcon() {
-                setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/com/techstockmaster/resources/computador.png")));
+                setIconImage(Toolkit.getDefaultToolkit()
+                                .getImage(getClass().getResource("/com/techstockmaster/resources/computador.png")));
         }
 }

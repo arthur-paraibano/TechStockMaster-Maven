@@ -1,13 +1,17 @@
 package com.techstockmaster.model.dao;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.techstockmaster.imp.GenericDao;
 import com.techstockmaster.model.entities.Movement;
 import com.techstockmaster.util.Session;
 import com.techstockmaster.util.base.DatabaseSist;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MovementDAO implements GenericDao<Movement> {
     private Connection con;
@@ -41,7 +45,6 @@ public class MovementDAO implements GenericDao<Movement> {
         throw new UnsupportedOperationException("Unimplemented method 'add'");
     }
 
-
     @Override
     public void update(Movement enty) throws SQLException, Exception {
         String sql = "UPDATE bd_estoque.conserto SET DESCRICAO = ?, STATUS = ? WHERE ID = ?";
@@ -63,7 +66,7 @@ public class MovementDAO implements GenericDao<Movement> {
     @Override
     public List<Movement> findAll() throws SQLException, Exception {
         List<Movement> lista = new ArrayList<>();
-        String sql = "SELECT CO.ID AS ID, EQ.EQUIPAMENTO AS EQUIPAMENTO, CO.TAG AS TAG, ST.NOME AS SETOR, LG.USERNAME AS TECNICO, CO.DATA AS DATA,  CO.STATUS AS STATUS FROM bd_estoque.conserto CO  LEFT JOIN bd_estoque.equipamento EQ ON CO.FK_EQUIPE = EQ.ID LEFT JOIN bd_estoque.setor ST ON CO.FK_SET = ST.ID LEFT JOIN bd_estoque.user LG ON CO.FK_TECNIC = LG.ID ORDER BY CO.ID ASC";
+        String sql = "SELECT CO.ID AS ID, EQ.EQUIPAMENTO AS EQUIPAMENTO, CO.TAG AS TAG, ST.NOME AS SETOR, LG.USERNAME AS TECNICO, CO.DATA AS DATA,  CO.STATUS AS STATUS FROM bd_estoque.conserto CO  LEFT JOIN bd_estoque.equipamento EQ ON CO.FK_EQUIPE = EQ.ID LEFT JOIN bd_estoque.setor ST ON CO.FK_SET = ST.ID LEFT JOIN bd_estoque.usernames LG ON CO.FK_TECNIC = LG.ID ORDER BY CO.ID ASC";
         this.con = DatabaseSist.getConnection();
         this.stmt = this.con.prepareStatement(sql);
         this.rs = this.stmt.executeQuery();

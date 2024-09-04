@@ -12,7 +12,6 @@ import com.techstockmaster.imp.GenericDao;
 import com.techstockmaster.model.entities.CalledTI;
 import com.techstockmaster.util.base.DatabaseSist;
 
-
 public class CalledTIDAO implements GenericDao<CalledTI> {
 
     private Connection con;
@@ -49,7 +48,7 @@ public class CalledTIDAO implements GenericDao<CalledTI> {
     @Override
     public List<CalledTI> findAll() throws SQLException, Exception {
         List<CalledTI> lista = new ArrayList<>();
-        String sql = "SELECT CH.ID AS ID, ST.NOME AS SETOR, LG.USERNAME AS TECNICO, CH.DESCRICAO, CH.DATA FROM bd_estoque.chamados_ti CH LEFT JOIN bd_estoque.setor ST ON CH.FK_CODSETOR = ST.ID LEFT JOIN bd_estoque.user LG ON CH.FK_CODLOGIN = LG.ID ORDER BY CH.FK_CODLOGIN ASC";
+        String sql = "SELECT CH.ID AS ID, ST.NOME AS SETOR, LG.USERNAME AS TECNICO, CH.DESCRICAO, CH.DATA FROM bd_estoque.chamados_ti CH LEFT JOIN bd_estoque.setor ST ON CH.FK_CODSETOR = ST.ID LEFT JOIN bd_estoque.usernames LG ON CH.FK_CODLOGIN = LG.ID ORDER BY CH.FK_CODLOGIN ASC";
         this.con = DatabaseSist.getConnection();
         this.stmt = this.con.prepareStatement(sql);
         this.rs = this.stmt.executeQuery();
