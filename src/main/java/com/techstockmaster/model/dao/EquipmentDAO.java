@@ -361,19 +361,20 @@ public class EquipmentDAO implements GenericDao<Equipment> {
 
     public List<Equipment> lista() throws SQLException, Exception {
         List<Equipment> list = new ArrayList<>();
+        String sql = "SELECT *FROM integracao.view_material WHERE ID > ? ORDER BY ID ASC";
         this.con = DatabaseSistLykos.getConnection();
-        this.stmt = con.prepareStatement(
-                "SELECT CAST(ID AS SIGNED) AS ID_KERY, CODIGO as codigo, DESCRICAO as descricao, ID_UM as id_um, ABREVIACAO_UM as abreviacao_um, DESCRICAO_UM as descricao_um FROM integracao.view_material WHERE ID > ? ORDER BY ID ASC");
+        this.stmt = con.prepareStatement(sql);
+
         this.stmt.setString(1, ultimoSequencia());
         this.rs = stmt.executeQuery();
 
         while (rs.next()) {
             Equipment e = new Equipment();
-            e.setId_kery(rs.getInt("ID_KERY"));
-            e.setCodigo(rs.getString("codigo"));
-            e.setDescricao(rs.getString("descricao"));
-            e.setAbreviacao_un(rs.getString("abreviacao_um"));
-            e.setDescricao_un(rs.getString("descricao_um"));
+            e.setId_kery(rs.getInt("ID"));
+            e.setCodigo(rs.getString("CODIGO"));
+            e.setDescricao(rs.getString("DESCRICAO"));
+            e.setAbreviacao_un(rs.getString("ABREVIACAO_UM"));
+            e.setDescricao_un(rs.getString("DESCRICAO_UM"));
             list.add(e);
         }
         DatabaseSistLykos.closeConnection(con, stmt, rs);
@@ -382,14 +383,19 @@ public class EquipmentDAO implements GenericDao<Equipment> {
 
     public String ultimoSequencia() throws SQLException, Exception {
         String id_kery = null;
-        this.con = DatabaseSist.getConnection();
+        Connection cd = DatabaseSist.getConnection();
         String sql = "SELECT ID_KERY FROM bd_estoque.equipamento_geral order by  ID_KERY desc limit 1";
-        this.stmt = con.prepareStatement(sql);
-        this.rs = this.stmt.executeQuery();
-        if (rs.next()) {
-            id_kery = String.valueOf(rs.getInt("ID_KERY"));
+        PreparedStatement s = cd.prepareStatement(sql);
+        ResultSet rrs = s.executeQuery();
+        if (rrs.next()) {
+            id_kery = String.valueOf(rrs.getInt("ID_KERY"));
         }
+        cd.close();
+        rs.close();
+        rrs.close();
+
         return id_kery;
+
     }
 
     public Double getSaldo(Equipment enty) throws SQLException, Exception {
