@@ -1,10 +1,5 @@
 package com.techstockmaster.model.dao;
 
-import com.techstockmaster.imp.GenericDao;
-import com.techstockmaster.model.entities.Equipment;
-import com.techstockmaster.util.base.DatabaseSist;
-import com.techstockmaster.util.base.DatabaseSistLykos;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techstockmaster.imp.GenericDao;
+import com.techstockmaster.model.entities.Equipment;
+import com.techstockmaster.util.base.DatabaseSist;
+import com.techstockmaster.util.base.DatabaseSistLykos;
 
 public class EquipmentDAO implements GenericDao<Equipment> {
 
@@ -350,7 +349,7 @@ public class EquipmentDAO implements GenericDao<Equipment> {
         this.con = DatabaseSist.getConnection();
         String sql = "INSERT INTO bd_estoque.equipamento_geral (ID_KERY, CODIGO, DESCRICAO, ABREVIACAO_UM, DESCRICAO_UM) VALUES (?,?,?,?,?)";
         this.stmt = this.con.prepareStatement(sql);
-        this.stmt.setLong(1, equipment.getId_kery());
+        this.stmt.setInt(1, equipment.getId_kery());
         this.stmt.setString(2, equipment.getCodigo());
         this.stmt.setString(3, equipment.getDescricao());
         this.stmt.setString(4, equipment.getAbreviacao_un());
@@ -364,16 +363,17 @@ public class EquipmentDAO implements GenericDao<Equipment> {
         List<Equipment> list = new ArrayList<>();
         this.con = DatabaseSistLykos.getConnection();
         this.stmt = con.prepareStatement(
-                "SELECT CAST(ID AS SIGNED) AS ID_KERY, CODIGO, DESCRICAO, ID_UM, ABREVIACAO_UM, DESCRICAO_UM FROM integracao.view_material WHERE ID > ? ORDER BY ID ASC");
+                "SELECT CAST(ID AS SIGNED) AS ID_KERY, CODIGO as codigo, DESCRICAO as descricao, ID_UM as id_um, ABREVIACAO_UM as abreviacao_um, DESCRICAO_UM as descricao_um FROM integracao.view_material WHERE ID > ? ORDER BY ID ASC");
         this.stmt.setString(1, ultimoSequencia());
         this.rs = stmt.executeQuery();
+
         while (rs.next()) {
             Equipment e = new Equipment();
-            e.setId_kery(rs.getLong("ID_KERY"));
-            e.setCodigo(rs.getString("CODIGO"));
-            e.setDescricao(rs.getString("DESCRICAO"));
-            e.setAbreviacao_un(rs.getString("ABREVIACAO_UM"));
-            e.setDescricao_un(rs.getString("DESCRICAO_UM"));
+            e.setId_kery(rs.getInt("ID_KERY"));
+            e.setCodigo(rs.getString("codigo"));
+            e.setDescricao(rs.getString("descricao"));
+            e.setAbreviacao_un(rs.getString("abreviacao_um"));
+            e.setDescricao_un(rs.getString("descricao_um"));
             list.add(e);
         }
         DatabaseSistLykos.closeConnection(con, stmt, rs);

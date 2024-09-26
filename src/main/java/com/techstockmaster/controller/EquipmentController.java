@@ -1,16 +1,17 @@
 package com.techstockmaster.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.SwingUtilities;
+
 import com.techstockmaster.model.dao.EquipmentDAO;
 import com.techstockmaster.model.entities.Equipment;
 import com.techstockmaster.model.entities.Movement;
 import com.techstockmaster.model.entities.Tag;
 import com.techstockmaster.util.Message;
 import com.techstockmaster.view.login.Loading;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class EquipmentController {
     private final EquipmentDAO dao;
@@ -222,33 +223,37 @@ public class EquipmentController {
             public void run() {
                 try {
                     List<Equipment> list = new ArrayList<>();
-                    try {
-                        list = new ArrayList<>(dao.lista());
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
+                    list = new ArrayList<>(dao.lista());
+
                     for (Equipment eq : list) {
-                        dao.equipmentRegistration(eq);
+                        try {
+                            dao.equipmentRegistration(eq); // Tratar exceções de DAO
+                        } catch (SQLException e) {
+                            System.err.println(
+                                    "Erro ao registrar equipamento: " + eq.getCodigo() + " - " + e.getMessage());
+                            // Você pode optar por continuar ou interromper o loop, dependendo do
+                            // comportamento desejado
+                        }
                     }
+
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
                             Message.sucess(null, "Lista de equipamentos atualizados com sucesso!!!");
+                            loading.dispose(); // Certifique-se de que o loading seja fechado aqui
                         }
                     });
-                    loading.dispose();
+
                 } catch (Exception ex) {
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {
                             ex.printStackTrace();
                             Message.errorX(null, "Erro 'ContView = atualizarEquipamento' " + ex.getMessage());
-                            System.out.println(ex.getMessage());
+                            loading.dispose(); // Certifique-se de que o loading seja fechado também em caso de erro
                         }
                     });
-                    loading.dispose();
                 }
-
             }
         });
         thread.start();

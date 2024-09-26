@@ -29,7 +29,7 @@ public class Message {
         Icon figura = new ImageIcon(
                 new ImageIcon(Objects.requireNonNull(Message.class.getResource("/com/techstockmaster/resources/x.png")))
                         .getImage());
-        JOptionPane.showMessageDialog(component, message + "\n", "Sucesso", JOptionPane.ERROR_MESSAGE, figura);
+        JOptionPane.showMessageDialog(component, message + "\n", "ERRO", JOptionPane.ERROR_MESSAGE, figura);
     }
 
     public static void sucess(Component component, String message) {

@@ -1,15 +1,18 @@
 package com.techstockmaster.util;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import java.io.*;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.Properties;
 
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 
 /*
     Casse responsável pela criptografia de arquivos properties.
@@ -24,7 +27,8 @@ public class CriptografiaUtils {
         KeyGenerator keyGenerator = KeyGenerator.getInstance(ALGORITHM);
         keyGenerator.init(128);
         SecretKey secretKey = keyGenerator.generateKey();
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(Files.newOutputStream(Paths.get(SECRET_KEY_FILE)))) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(
+                Files.newOutputStream(Paths.get(SECRET_KEY_FILE)))) {
             outputStream.writeObject(secretKey);
         }
         return secretKey;
@@ -168,15 +172,16 @@ public class CriptografiaUtils {
     }
 
     /*
-        Medodo Main para testar a classe, e criar novas propriedades criptografadas.
-        Descomentar para testar.
+     * Medodo Main para testar a classe, e criar novas propriedades criptografadas.
+     * Descomentar para testar.
      */
-    /*
+
     public static void main(String[] args) {
         // Colocar dentro de um metodo
         CriptografiaUtils criptoUtils = new CriptografiaUtils();
         // Exemplo de uso:
-        criptoUtils.criptografarArquivo("dbLocal.properties");
-        // criptoUtils.descriptografarArquivo("dbLykos.properties.encrypted");
-    } */
+        // criptoUtils.criptografarArquivo("dbLocal.properties");
+        Properties props = criptoUtils.obterPropriedadesDescriptografadas("dbLykos.properties.encrypted");
+        System.out.println(props);
+    }
 }

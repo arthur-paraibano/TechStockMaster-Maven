@@ -1,8 +1,8 @@
 package com.techstockmaster.model.entities;
 
 public class Equipment {
-    private int id;
-    private Long id_kery;
+    private Integer id;
+    private Integer id_kery;
     private String codigo;
     private String nome;
     private String abreviacao_un;
@@ -12,12 +12,12 @@ public class Equipment {
     private Sector setor;
     private Tag tag;
     private String status;
-    //private Repair repair;
+    // private Repair repair;
 
     public Equipment() {
         this.setor = new Sector();
         this.tag = new Tag();
-        //this.repair = new Repair();
+        // this.repair = new Repair();
     }
 
     public Equipment(String codigo, String nome, String abreviacao_un, String descricao) {
@@ -41,11 +41,11 @@ public class Equipment {
         this.id = id;
     }
 
-    public Long getId_kery() {
+    public Integer getId_kery() {
         return id_kery;
     }
 
-    public void setId_kery(Long id_kery) {
+    public void setId_kery(Integer id_kery) {
         this.id_kery = id_kery;
     }
 
@@ -122,11 +122,11 @@ public class Equipment {
     }
 
     // public Repair getRepair() {
-    //     return repair;
+    // return repair;
     // }
 
     // public void setRepair(Repair repair) {
-    //     this.repair = repair;
+    // this.repair = repair;
     // }
 
     @Override
