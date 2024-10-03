@@ -1,13 +1,13 @@
 package com.techstockmaster.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.techstockmaster.model.dao.EquipmentDAO;
 import com.techstockmaster.model.dao.MovementDAO;
 import com.techstockmaster.model.entities.Movement;
 import com.techstockmaster.model.entities.TypeMovement;
 import com.techstockmaster.util.Message;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MovementController {
     private final MovementDAO dao;
@@ -24,12 +24,13 @@ public class MovementController {
                 Double qtdAtual = equipmentDAO.getSaldo(movement.getEquipment());
 
                 if (movement.getType().equals(TypeMovement.IN)) {
-                    dao.addEntry(movement);
+                    dao.addIn(movement);
                     movement.getEquipment().setQuantidade(qtdAtual + movement.getAmount());
                     equipmentDAO.updateSaldo(movement.getEquipment());
                 } else if (movement.getType().equals(TypeMovement.OUT)) {
                     if (movement.getAmount() > qtdAtual) {
-                        Message.errorX(null, "Quantidade insuficiente no estoque, saldo atual: " + qtdAtual);
+                        Message.errorX(null, "Quantidade insuficiente no estoque para o material: "
+                                + movement.getEquipment().getNome() + " saldo atual: " + qtdAtual);
                         return false;
                     } else {
                         dao.addEntry(movement);

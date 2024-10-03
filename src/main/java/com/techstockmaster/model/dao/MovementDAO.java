@@ -22,6 +22,22 @@ public class MovementDAO implements GenericDao<Movement> {
      * Dados apara atualizar os equipamentos do banco de dados da Lykos para base de
      * dados local.
      ***/
+    public Integer addIn(Movement movement) throws SQLException, Exception {
+        this.con = DatabaseSist.getConnection();
+        String sql = "INSERT INTO bd_estoque.movimento (FK_CODEQUIP, QUANTIDADE, N_LYKOS, DATA, FK_CODUSER, TYPE) VALUES ( ?, ?, ?, ?, ?, ?)";
+        this.stmt = this.con.prepareStatement(sql);
+        int rowsAffected = 0;
+        this.stmt.setInt(1, movement.getEquipment().getId());
+        this.stmt.setDouble(2, movement.getAmount());
+        this.stmt.setString(3, movement.getOsLykos());
+        this.stmt.setDate(4, (Date) movement.getDate());
+        this.stmt.setLong(5, Session.getUser().getId());
+        this.stmt.setString(6, movement.getType().name());
+        rowsAffected = this.stmt.executeUpdate();
+        DatabaseSist.closeConnection(con, stmt, null);
+        return rowsAffected;
+    }
+
     public Integer addEntry(Movement movement) throws SQLException, Exception {
         this.con = DatabaseSist.getConnection();
         String sql = "INSERT INTO bd_estoque.movimento (FK_CODEQUIP, QUANTIDADE, N_LYKOS, DATA, FK_CODUSER, TYPE, FK_CODSETOR) VALUES ( ?, ?, ?, ?, ?, ?, ?)";

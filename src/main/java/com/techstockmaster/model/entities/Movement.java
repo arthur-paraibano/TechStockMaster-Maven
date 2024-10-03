@@ -22,12 +22,15 @@ public class Movement {
         this.user = new User();
     }
 
-    public Movement(TypeMovement type, Double amount, Date date, Sector sector, String osLykos,
+    public Movement(Sector sector) {
+        this.sector = sector;
+    }
+
+    public Movement(TypeMovement type, Double amount, Date date, String osLykos,
             Equipment equipment) {
         this.type = type;
         this.amount = amount;
         this.date = date;
-        this.sector = sector;
         this.osLykos = osLykos;
         this.equipment = equipment;
     }
@@ -114,7 +117,7 @@ public class Movement {
 
     public void setTag(Tag tag) {
         this.tag = tag;
-    }    
+    }
 
     public User getUser() {
         return user;

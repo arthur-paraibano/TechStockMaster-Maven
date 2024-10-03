@@ -35,7 +35,7 @@ public class LoginView extends javax.swing.JFrame {
                 this.obj = new User();
                 EnterToTab.add(jTexF_Usuario);
                 EnterToTab.add(jTexF_Senha);
-                jTexF_Usuario.setText("adm");
+                jTexF_Usuario.setText("admin");
                 jTexF_Senha.setText("admin");
         }
 
