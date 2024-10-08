@@ -25,8 +25,13 @@ public class RepairDAO implements GenericDao<Repair> {
 
     @Override
     public void update(Repair enty) throws SQLException, Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        String sql = "UPDATE bd_estoque.conserto SET STATUS = ? WHERE ID = ?";
+        this.con = DatabaseSist.getConnection();
+        this.stmt = con.prepareStatement(sql);
+        this.stmt.setString(1, enty.getStatus());
+        this.stmt.setInt(2, enty.getId());
+        stmt.executeUpdate();
+        DatabaseSist.closeConnection(con, stmt, rs);
     }
 
     @Override

@@ -171,7 +171,7 @@ public class EquipmentDAO implements GenericDao<Equipment> {
     public List<Equipment> findAllTab() throws SQLException, Exception {
         List<Equipment> lista = new ArrayList<>();
         this.con = DatabaseSist.getConnection();
-        String sql = "SELECT ED.ID AS ID, CODIGO, EQUIPAMENTO, UND, STATUS, S.NOME AS SETOR, concat(ABREV_TAG,'-',LPAD(TAG_SEQ+1,3,0)) AS NOVA_TAG FROM bd_estoque.equipamento ED LEFT JOIN  bd_estoque.tag T ON FK_TAG = T.ID LEFT JOIN bd_estoque.setor S ON ID_CODSETOR = S.ID";
+        String sql = "SELECT ED.ID AS ID, CODIGO, EQUIPAMENTO, UND, STATUS, S.NOME AS SETOR, concat(abrevTag,'-',LPAD(TAG_SEQ+1,3,0)) AS NOVA_TAG FROM bd_estoque.equipamento ED LEFT JOIN  bd_estoque.tag T ON FK_TAG = T.ID LEFT JOIN bd_estoque.setor S ON ID_CODSETOR = S.ID";
         this.stmt = this.con.prepareStatement(sql);
         this.rs = this.stmt.executeQuery();
 
@@ -234,7 +234,7 @@ public class EquipmentDAO implements GenericDao<Equipment> {
 
     public Equipment findById(int idEquip) throws SQLException, Exception {
         Equipment object = null;
-        String sql = "SELECT ED.ID AS ID, CODIGO, EQUIPAMENTO, UND, DESCRICAO, STATUS, S.NOME AS SETOR, DESC_TAG, ABREV_TAG, concat(ABREV_TAG,'-',LPAD(TAG_SEQ, 3,0)) AS TAG FROM bd_estoque.equipamento ED LEFT JOIN  bd_estoque.tag T ON FK_TAG = T.ID  LEFT JOIN bd_estoque.setor S ON ID_CODSETOR = S.ID WHERE ED.ID = ?";
+        String sql = "SELECT ED.ID AS ID, CODIGO, EQUIPAMENTO, UND, DESCRICAO, STATUS, S.NOME AS SETOR, descTag, abrevTag, concat(abrevTag,'-',LPAD(TAG_SEQ, 3,0)) AS TAG FROM bd_estoque.equipamento ED LEFT JOIN  bd_estoque.tag T ON FK_TAG = T.ID  LEFT JOIN bd_estoque.setor S ON ID_CODSETOR = S.ID WHERE ED.ID = ?";
         this.con = DatabaseSist.getConnection();
         this.stmt = this.con.prepareStatement(sql);
         this.stmt.setInt(1, idEquip);
@@ -249,8 +249,8 @@ public class EquipmentDAO implements GenericDao<Equipment> {
             object.setDescricao(rs.getString("DESCRICAO"));
             object.setStatus(rs.getString("STATUS"));
             object.getSetor().setnome(rs.getString("SETOR"));
-            object.getTag().setType(rs.getString("DESC_TAG"));
-            object.getTag().setAbreviacao(rs.getString("ABREV_TAG"));
+            object.getTag().setType(rs.getString("descTag"));
+            object.getTag().setAbreviacao(rs.getString("abrevTag"));
             object.getTag().setNova(rs.getString("TAG"));
         }
         return object;
@@ -260,7 +260,7 @@ public class EquipmentDAO implements GenericDao<Equipment> {
         List<Equipment> list = new ArrayList<>();
 
         Equipment object = null;
-        String sql = "SELECT ED.ID AS ID, CODIGO, EQUIPAMENTO, UND, DESCRICAO, STATUS, S.NOME AS SETOR, DESC_TAG, ABREV_TAG, concat(ABREV_TAG,'-',LPAD(TAG_SEQ, 3,0)) AS TAG FROM bd_estoque.equipamento ED LEFT JOIN  bd_estoque.tag T ON FK_TAG = T.ID  LEFT JOIN bd_estoque.setor S ON ID_CODSETOR = S.ID WHERE ED.ID = ?";
+        String sql = "SELECT ED.ID AS ID, CODIGO, EQUIPAMENTO, UND, DESCRICAO, STATUS, S.NOME AS SETOR, descTag, abrevTag, concat(abrevTag,'-',LPAD(TAG_SEQ, 3,0)) AS TAG FROM bd_estoque.equipamento ED LEFT JOIN  bd_estoque.tag T ON FK_TAG = T.ID  LEFT JOIN bd_estoque.setor S ON ID_CODSETOR = S.ID WHERE ED.ID = ?";
         this.con = DatabaseSist.getConnection();
         this.stmt = this.con.prepareStatement(sql);
         this.stmt.setInt(1, item.getId());
@@ -275,8 +275,8 @@ public class EquipmentDAO implements GenericDao<Equipment> {
             object.setDescricao(rs.getString("DESCRICAO"));
             object.setStatus(rs.getString("STATUS"));
             object.getSetor().setnome(rs.getString("SETOR"));
-            object.getTag().setType(rs.getString("DESC_TAG"));
-            object.getTag().setAbreviacao(rs.getString("ABREV_TAG"));
+            object.getTag().setType(rs.getString("descTag"));
+            object.getTag().setAbreviacao(rs.getString("abrevTag"));
             object.getTag().setNova(rs.getString("TAG"));
             list.add(object);
         }
@@ -285,7 +285,7 @@ public class EquipmentDAO implements GenericDao<Equipment> {
 
     public Equipment findByNome(String item) throws SQLException, Exception {
         Equipment object = null;
-        String sql = "SELECT ED.ID AS ID, CODIGO, EQUIPAMENTO, UND, DESCRICAO, STATUS, S.NOME AS SETOR, DESC_TAG, ABREV_TAG, concat(ABREV_TAG,'-',LPAD(TAG_SEQ, 3,0)) AS TAG FROM bd_estoque.equipamento ED LEFT JOIN  bd_estoque.tag T ON FK_TAG = T.ID  LEFT JOIN bd_estoque.setor S ON ID_CODSETOR = S.ID WHERE EQUIPAMENTO = ?";
+        String sql = "SELECT ED.ID AS ID, CODIGO, EQUIPAMENTO, UND, DESCRICAO, STATUS, S.NOME AS SETOR, descTag, abrevTag, concat(abrevTag,'-',LPAD(TAG_SEQ, 3,0)) AS TAG FROM bd_estoque.equipamento ED LEFT JOIN  bd_estoque.tag T ON FK_TAG = T.ID  LEFT JOIN bd_estoque.setor S ON ID_CODSETOR = S.ID WHERE EQUIPAMENTO = ?";
         this.con = DatabaseSist.getConnection();
         this.stmt = this.con.prepareStatement(sql);
         this.stmt.setString(1, item);
@@ -300,8 +300,8 @@ public class EquipmentDAO implements GenericDao<Equipment> {
             object.setDescricao(rs.getString("DESCRICAO"));
             object.setStatus(rs.getString("STATUS"));
             object.getSetor().setnome(rs.getString("SETOR"));
-            object.getTag().setType(rs.getString("DESC_TAG"));
-            object.getTag().setAbreviacao(rs.getString("ABREV_TAG"));
+            object.getTag().setType(rs.getString("descTag"));
+            object.getTag().setAbreviacao(rs.getString("abrevTag"));
             object.getTag().setNova(rs.getString("TAG"));
         }
         return object;

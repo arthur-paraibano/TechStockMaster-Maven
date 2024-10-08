@@ -1,13 +1,16 @@
 package com.techstockmaster.model.dao;
 
-import com.techstockmaster.imp.GenericDao;
-import com.techstockmaster.model.entities.Tag;
-import com.techstockmaster.util.base.DatabaseSist;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techstockmaster.imp.GenericDao;
+import com.techstockmaster.model.entities.Tag;
+import com.techstockmaster.util.base.DatabaseSist;
 
 public class TagDao implements GenericDao<Tag> {
 
@@ -17,7 +20,7 @@ public class TagDao implements GenericDao<Tag> {
 
     @Override
     public void add(Tag enty) throws SQLException, Exception {
-        String sql = "INSERT INTO bd_estoque.tag (abrevTag, descTag, data) VALUES(?,?,?)";
+        String sql = "INSERT INTO bd_estoque.tag (abrevTag, descTag, DATA) VALUES(?,?,?)";
         this.con = DatabaseSist.getConnection();
         this.stmt = con.prepareStatement(sql);
         this.stmt.setString(1, enty.getAbreviacao());
@@ -45,7 +48,7 @@ public class TagDao implements GenericDao<Tag> {
     @Override
     public List<Tag> findAll() throws SQLException, Exception {
         List<Tag> list = new ArrayList<>();
-        String sql = "SELECT id, abrevTag, descTag, data FROM bd_estoque.tag ORDER BY descTag ASC";
+        String sql = "SELECT ID, abrevTag, descTag, DATA FROM bd_estoque.tag ORDER BY descTag ASC";
         this.con = DatabaseSist.getConnection();
         this.stmt = this.con.prepareStatement(sql);
         this.rs = this.stmt.executeQuery();
@@ -64,7 +67,7 @@ public class TagDao implements GenericDao<Tag> {
     public List<Tag> findAllTab() throws SQLException, Exception {
         List<Tag> lista = new ArrayList<>();
         this.con = DatabaseSist.getConnection();
-        String sql = "SELECT id, abrevTag, descTag, data FROM bd_estoque.tag";
+        String sql = "SELECT ID, abrevTag, descTag, DATA FROM bd_estoque.tag";
         this.stmt = this.con.prepareStatement(sql);
         this.rs = this.stmt.executeQuery();
 
